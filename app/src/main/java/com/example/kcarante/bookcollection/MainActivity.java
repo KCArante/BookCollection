@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Books> b = new ArrayList<Books>();
     JSONArray books = null;
+    ArrayList<String> titleBooks = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,7 @@ public class MainActivity extends AppCompatActivity {
         GetBooks task = new GetBooks();
         task.execute();
 
-        ArrayList<String> title = new ArrayList<String>();
-
-        for(int i = 0; i<b.size(); i++){
-
-        }
-        ArrayAdapter<Books> adapter = new ArrayAdapter<>(this, R.layout.list_item, b);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item, titleBooks);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -116,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         bookSample.setAuthor(author);
                         bookSample.setIsRead(isRead);
 
+                        titleBooks.add(title);
                         b.add(bookSample);
                     }
                }
