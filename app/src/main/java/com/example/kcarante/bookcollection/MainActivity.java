@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_ISREAD = "isRead";
 
     //url
-    private static String url = "http://172.17.3.51:5856/api/books";
+    private static String url = "http://joseniandroid.herokuapp.com/api/books";
 
     ArrayList<Books> b = new ArrayList<Books>();
     JSONArray books = null;
@@ -52,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         GetBooks task = new GetBooks();
         task.execute();
+
+        ArrayList<String> title = new ArrayList<String>();
+
+        for(int i = 0; i<b.size(); i++){
+
+        }
         ArrayAdapter<Books> adapter = new ArrayAdapter<>(this, R.layout.list_item, b);
 
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -91,12 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
             if(jsonStr != null){
                 try {
-                    JSONObject jsonObject = new JSONObject(jsonStr);
-                    books = jsonObject.getJSONArray("");
+                    JSONArray jsonArray = new JSONArray(jsonStr);
 
-                    for(int i=0; i<books.length(); i++){
+                    for(int i=0; i<jsonArray.length(); i++){
 
-                        JSONObject samp = books.getJSONObject(i);
+                        JSONObject samp = jsonArray.getJSONObject(i);
                         Books bookSample = new Books();
 
                         String id = samp.getString(TAG_ID);
