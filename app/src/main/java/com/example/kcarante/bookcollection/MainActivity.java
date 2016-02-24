@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         task.execute();
         ArrayAdapter<Books> adapter = new ArrayAdapter<>(this, R.layout.list_item, b);
 
-        ListView listView = (ListView) findViewById(android.R.id.list);
+        ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             HttpUtils httpUtils = new HttpUtils();
 
             // Making a request to url and getting response
-            String jsonStr = httpUtils.getResponse(url, "");
+            String jsonStr = httpUtils.getResponse(url, "GET");
             Log.d("Response: ", "> " + jsonStr);
 
             if(jsonStr != null){
