@@ -7,58 +7,53 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
  * Created by SARJ on 2/23/2016.
  */
-public class SpecialAdapter extends ArrayAdapter {
+public class SpecialAdapter extends ArrayAdapter<Books> {
 
-    ArrayList<Books> books;
-    int textView;
     Context context;
+    ViewHolder viewHolder;
+    ArrayList<Books> books;
 
     public SpecialAdapter(Context context, int resource, ArrayList<Books> booksArrayList ) {
         super(context, resource, booksArrayList);
-        this.context = context;
-        this.books = booksArrayList;
-        this.textView = resource;
-    }
+        this.books = booksArrayList;}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-       ViewHolder viewHolder;
+       View row = convertView;
 
-        if(convertView == null){
-
-            convertView = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
+       if(convertView == null){
+            convertView = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1 , parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }
-        else {
-            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Books temp = books.get(position);
 
         if(temp != null){
 
-            if(viewHolder.mTextView != null){
-                viewHolder.mTextView.setText(temp.getTitle());
+              TextView mTextView = null;
+            if(mTextView != null){
+                mTextView.setText(temp.getTitle());
 
                 if(temp.isRead()){
-                    viewHolder.mTextView.setTextColor(Color.RED);
-                    viewHolder.mTextView.setPaintFlags(viewHolder.mTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    mTextView.setTextColor(Color.RED);
+                    mTextView.setPaintFlags(mTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
                 else {
-                    viewHolder.mTextView.setTextColor(Color.DKGRAY);
-                    viewHolder.mTextView.setPaintFlags( viewHolder.mTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                    mTextView.setTextColor(Color.DKGRAY);
+                    mTextView.setPaintFlags( mTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 }
 
             }
         }
 
-        return convertView;
+        return null;
     }
 }
